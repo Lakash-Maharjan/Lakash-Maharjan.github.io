@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="/images/favicon.jpeg" type="image/x-icon" />
+    <script
+      src="https://kit.fontawesome.com/7e54cef37a.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Lakash Maharjan Portfolio</title>
+  </head>
+  <body>
+    <div id="header">
+      <div class="container">
+        <nav>
+          <img src="images/logo.png" class="logo" />
+          <ul id="sidemenu">
+            <li><a href="/">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Conact</a></li>
+            <li><a href="form">Add details</a></li>
+            <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+          </ul>
+          <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+          <p>Frontend designer</p>
+          <h1>
+            Hi, I'm <span>Lakash Maharjan</span> <br />
+            From Nepal
+          </h1>
+        </div>
+      </div>
+    </div>
+    <!-- ------------------about---------------- -->
+    <div id="about">
+      <div class="container">
+        <div class="row">
+          <div class="about-col-1">
+            <img src="images/user.png" alt="" />
+          </div>
+          <div class="about-col-2">
+            <h1 class="sub-title">About Me</h1>
+            <p>
+              I am an energetic student always trying to learn and create new
+              and innovatiove things which can help me and develop my skills
+            </p>
+            <div class="tab-titles">
+              <p class="tab-links active-link" onclick="opentab('skills')">
+                Skills
+              </p>
+              <p class="tab-links" onclick="opentab('experience')">
+                Experience
+              </p>
+              <p class="tab-links" onclick="opentab('education')">Education</p>
+            </div>
+            <div class="tab-contents active-tab" id="skills">
+              <ul>
+                <% if (ski.length > 0) { %> <% ski.map((item) => { %>
+                <li>
+                  <span><%= item.Skill %></span><br /><%= item.Description %>
+                </li>
+                <% }) %> <% } else { %>
+                <li><sne yet</span></li>
+                <% } %>
+              </ul>
+            </div>
+            <div class="tab-contents" id="experience">
+              <ul>
+                <% if (exp.length > 0) { %> <% exp.map((item) => { %>
+                <li>
+                  <span><%= item.Experience %></span><br /><%= item.Detail %>
+                </li>
+                <% }) %> <% } else { %>
+                <li><span>None yet</span></li>
+                <% } %>
+              </ul>
+            </div>
+            <div class="tab-contents" id="education">
+              <ul>
+                <% if (edu.length > 0) { %> <% edu.map((item) => { %>
+                <li><span><%= item.Year %></span><br /><%= item.Detail %></li>
+                <% }) %> <% } else { %>
+                <li><span>None yet</span></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ---------------------services-------------------- -->
+    <div class="services" id="services">
+      <div class="container">
+        <h1 class="sub-title">My Services</h1>
+        <div class="services-list">
+          <div>
+            <i class="fa-solid fa-code"></i>
+            <h2>Web Design</h2>
+            <p>
+              I can create websites abcording to your needs which can help you
+              or your business grow.
+            </p>
+            <a href="#">Learn More</a>
+          </div>
+          <div>
+            <i class="fa-solid fa-crop"></i>
+            <h2>UI/UX Design</h2>
+            <p>
+              I can design attractive and eyecatching interfaces thich will sure
+              increase the engagement.
+            </p>
+            <a href="#">Learn More</a>
+          </div>
+          <div>
+            <i class="fa-brands fa-app-store"></i>
+            <h2>App Design</h2>
+            <p>
+              I can sure create interesting and fun app for entertainment and
+              various other purposes.
+            </p>
+            <a href="#">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ----------portfolio---------- -->
+    <div id="portfolio">
+      <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+          <div class="work">
+            <img src="images/work-1.png" />
+            <div class="layer">
+              <h3>Social Media App</h3>
+              <p>
+                The app connects you to the talented people around the world.
+                Download it from play store
+              </p>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.instagram.android&hl=en&pli=1"
+                target="_blank"
+                ><i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+          </div>
+          <div class="work">
+            <img src="images/work-2.png" />
+            <div class="layer">
+              <h3>Music App</h3>
+              <p>
+                The app connects you to the talented artists around the world.
+                Download it from play store
+              </p>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.spotify.music&hl=en"
+                target="_blank"
+                ><i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+          </div>
+          <div class="work">
+            <img src="images/work-3.png" />
+            <div class="layer">
+              <h3>Online shopping App</h3>
+              <p>
+                The app connects you to the trusted sellers around the world.
+                Download it from play store
+              </p>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.daraz.android&hl=en"
+                target="_blank"
+                ><i class="fa-solid fa-arrow-up-right-from-square"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="btn">See more</a>
+      </div>
+    </div>
+    <!-- ---------------------contact-------------------- -->
+    <div id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="contact-left">
+            <h1 class="sub-title">Contact Me</h1>
+            <p>
+              <i class="fa-solid fa-paper-plane"></i>lakashmaharjan07@gmail.com
+            </p>
+            <p><i class="fa-solid fa-square-phone"></i>+977 9762415856</p>
+            <div class="social-icons">
+              <a
+                href="https://www.facebook.com/profile.php?id=100080350080683"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/lakash.maharjann/"
+                target="_blank"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/lakash-maharjan-a044712b2/"
+                target="_blank"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+              <a href="https://github.com/Lakash-Maharjan" target="_blank"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+            </div>
+            <a href="/documents/my-cv.pdf" class="btn btn2" download
+              >Download CV</a
+            >
+          </div>
+          <div class="contact-right">
+            <form name="submit-to-google-sheet">
+              <input
+                type="text"
+                name="Name"
+                placeholder="Name"
+                required
+                autocomplete="off"
+              />
+              <input
+                type="email"
+                name="Email"
+                placeholder="Your Email"
+                required
+                autocomplete="off"
+              />
+              <textarea
+                name="Message"
+                placeholder="Your Message"
+                rows="6"
+                required
+                autocomplete="off"
+              ></textarea>
+              <button type="submit" class="btn btn2">Submit</button>
+            </form>
+            <span id="msg"></span>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>Copyright © 2025 Lakash. All Rights Reserved.</p>
+      </div>
+    </div>
+    <!-- Custom Dialog Box for Contact Form -->
+    <div id="contact-dialog" class="dialog-overlay">
+      <div class="dialog-box">
+        <div class="dialog-content">
+          <div class="dialog-icon" id="contact-dialog-icon"></div>
+          <div class="dialog-message" id="contact-dialog-message">Success!</div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

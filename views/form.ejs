@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/form.css" />
+    <link rel="shortcut icon" href="/images/favicon.jpeg" type="image/x-icon" />
+    <script
+      src="https://kit.fontawesome.com/7e54cef37a.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Adding details</title>
+  </head>
+  <body>
+    <div id="header">
+      <div class="container">
+        <nav>
+          <img src="images/logo.png" class="logo" />
+          <ul id="sidemenu">
+            <li><a href="/../#header">Home</a></li>
+            <li><a href="/../#about">About</a></li>
+            <li><a href="/../#services">Services</a></li>
+            <li><a href="/../#portfolio">Portfolio</a></li>
+            <li><a href="/../#contact">Conact</a></li>
+            <li><a href="/form">Add details</a></li>
+            <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+          </ul>
+          <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Add your form content here -->
+    <div class="container">
+      <form>
+        <div class="radio-group">
+          <h3>Select Category:</h3>
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="skills"
+              name="category"
+              value="skills"
+              onchange="showForm('skills')"
+            />
+            <label
+              for="skills"
+              onclick="document.getElementById('skills').click()"
+              >Skills</label
+            >
+          </div>
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="experience"
+              name="category"
+              value="experience"
+              onchange="showForm('experience')"
+            />
+            <label
+              for="experience"
+              onclick="document.getElementById('experience').click()"
+              >Experience</label
+            >
+          </div>
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="education"
+              name="category"
+              value="education"
+              onchange="showForm('education')"
+            />
+            <label
+              for="education"
+              onclick="document.getElementById('education').click()"
+              >Education</label
+            >
+          </div>
+        </div>
+
+        <!-- Skills Form -->
+        <div id="skills-form" class="form-section" style="display: none">
+          <div class="form-group">
+            <h3>Add Skill</h3>
+            <input type="text" id="skill-name" placeholder="Skill" required />
+            <textarea
+              id="skill-details"
+              placeholder="Description"
+              rows="4"
+              required
+            ></textarea>
+            <button type="button" class="btn btn2" onclick="submitSkill()">
+              Add Skill
+            </button>
+          </div>
+        </div>
+
+        <!-- Experience Form -->
+        <div id="experience-form" class="form-section" style="display: none">
+          <div class="form-group">
+            <h3>Add Experience</h3>
+            <input
+              type="text"
+              id="experience-title"
+              placeholder="Experience"
+              required
+            />
+            <textarea
+              id="experience-details"
+              placeholder="Detail"
+              rows="4"
+              required
+            ></textarea>
+            <button type="button" class="btn btn2" onclick="submitExperience()">
+              Add Experience
+            </button>
+          </div>
+        </div>
+
+        <!-- Education Form -->
+        <div id="education-form" class="form-section" style="display: none">
+          <div class="form-group">
+            <h3>Add Education</h3>
+            <input
+              type="text"
+              id="education-year"
+              placeholder="Year (eg: 2064 - present)"
+              required
+            />
+            <textarea
+              id="education-details"
+              placeholder="Detail"
+              rows="4"
+              required
+            ></textarea>
+            <button type="button" class="btn btn2" onclick="submitEducation()">
+              Add Education
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="copyright">
+      <p>Copyright © 2025 Lakash. All Rights Reserved.</p>
+    </div>
+
+    <!-- Custom Dialog Box -->
+    <div id="custom-dialog" class="dialog-overlay">
+      <div class="dialog-box">
+        <div class="dialog-content">
+          <div class="dialog-icon" id="dialog-icon"></div>
+          <div class="dialog-message" id="dialog-message">Success!</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/form.js"></script>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+/* Custom styles for form.ejs */
+
+/* Override header background for form page */
+#header {
+  background: #000 !important;
+  background-image: none !important;
+  height: auto !important;
+  min-height: auto !important;
+}
+
+/* Remove extra spacing */
+.container {
+  padding: 10px 10% !important;
+}
+
+/* Form styles */
+form {
+  margin-top: 30px;
+}
+
+.radio-group {
+  background: linear-gradient(135deg, #262626 0%, #1a1a1a 100%);
+  padding: 40px;
+  border-radius: 15px;
+  margin-top: 20px;
+  border: 1px solid #333;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.radio-group::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff004f, #ff6b9d);
+}
+
+.radio-group h3 {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+}
+
+.radio-group h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: #ff004f;
+}
+
+.radio-option {
+  margin: 15px 0;
+  display: block;
+}
+
+.radio-option input[type="radio"] {
+  display: none;
+}
+
+.radio-option input[type="radio"]:checked + label {
+  color: #ff004f;
+  font-weight: 600;
+  background: rgba(255, 0, 79, 0.1);
+  border-color: #ff004f;
+}
+
+.radio-option label {
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  font-weight: 500;
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  display: block;
+  text-align: center;
+}
+
+.radio-option label:hover {
+  color: #ff004f;
+  background: rgba(255, 0, 79, 0.05);
+}
+
+/* Form section styles */
+.form-section {
+  margin-top: 30px;
+}
+
+.form-group {
+  background: #262626;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.form-group h3 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: #080808;
+  padding: 15px;
+  margin: 15px 0;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #ff004f;
+}
+
+.form-group textarea {
+  resize: none;
+  font-family: "Poppins", sans-serif;
+}
+
+.form-group .btn2 {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+/* Footer positioning */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}
+
+.copyright {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 25px 0;
+  background: #262626;
+  font-weight: 300;
+}
+
+/* Custom Dialog Box Styles */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dialog-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dialog-box {
+  background: #262626;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+  transform: scale(0.7);
+  transition: transform 0.3s ease;
+}
+
+.dialog-overlay.show .dialog-box {
+  transform: scale(1);
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.dialog-icon {
+  font-size: 48px;
+  color: #ff004f;
+  font-weight: bold;
+}
+
+.dialog-message {
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Additional form-specific styles can be added here */
