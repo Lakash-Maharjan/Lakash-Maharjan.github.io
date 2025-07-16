@@ -121,6 +121,18 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.get("/admin", async (req, res) => {
+  try {
+    const [ski] = await db.execute("SELECT * from skills");
+    const [edu] = await db.execute("SELECT * from education");
+    const [exp] = await db.execute("SELECT * from experience");
+    return res.render("admin", { ski, edu, exp });
+  } catch (err) {
+    console.log("Error while performing Query.", err);
+    return res.status(500).send("Database error");
+  }
+});
+
 app.get("/form", async (req, res) => {
   try {
     const [ski] = await db.execute("SELECT * from skills");
