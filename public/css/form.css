@@ -97,6 +97,10 @@ form {
 /* Form section styles */
 .form-section {
   margin-top: 30px;
+  display: none;
+}
+.form-section.active {
+  display: block;
 }
 
 .form-group {
@@ -198,6 +202,10 @@ body {
   transform: scale(1);
 }
 
+.hidden {
+  display: none !important;
+}
+
 .dialog-content {
   display: flex;
   flex-direction: column;
@@ -218,3 +226,171 @@ body {
 }
 
 /* Additional form-specific styles can be added here */
+
+/* --- Skill Table Styles --- */
+.skill-table {
+  margin-top: 30px;
+  margin-bottom: 32px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  overflow-x: auto;
+  padding: 20px;
+}
+
+.skill-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #181818;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.skill-table th,
+.skill-table td {
+  padding: 16px 14px;
+  text-align: left;
+}
+
+.skill-table th {
+  background: #ff004f;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-right: 1.5px solid #ff6b9d;
+}
+.skill-table th:last-child {
+  border-right: none;
+}
+
+.skill-table td {
+  color: #eee;
+  font-size: 16px;
+  background: #232323;
+  border-bottom: 1px solid #292929;
+}
+
+.skill-table tr:last-child td {
+  border-bottom: none;
+}
+
+.skill-table tr:hover td {
+  background: #2a2a2a;
+  transition: background 0.2s;
+}
+
+.skill-table button,
+.skill-table .btn {
+  background: #ff004f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.skill-table button:hover,
+.skill-table .btn:hover {
+  background: #ff3366;
+  color: #fff;
+}
+
+.skill-table td:last-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.skill-table td .btn,
+.skill-table td button {
+  display: inline-block;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+/* --- Edit Skill Dialog Styles --- */
+#edit-skill-dialog.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s;
+}
+#edit-skill-dialog .dialog-box {
+  background: #232323;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  padding: 36px 32px 28px 32px;
+  min-width: 340px;
+  max-width: 95vw;
+  color: #fff;
+  border: 1.5px solid #333;
+  text-align: left;
+}
+#edit-skill-dialog .dialog-content h3 {
+  color: #ff004f;
+  margin-bottom: 18px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+#edit-skill-dialog input[type="text"],
+#edit-skill-dialog textarea {
+  width: 100%;
+  background: #181818;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 7px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+#edit-skill-dialog input[type="text"]:focus,
+#edit-skill-dialog textarea:focus {
+  border-color: #ff004f;
+  outline: none;
+}
+#edit-skill-dialog .dialog-content > div {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+#edit-skill-dialog .btn {
+  min-width: 90px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 7px;
+  border: none;
+  background: #ff004f;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0;
+}
+#edit-skill-dialog .btn-edit {
+  background: #ff004f;
+}
+#edit-skill-dialog .btn-edit:hover {
+  background: #ff3366;
+}
+#edit-skill-dialog .btn:not(.btn-edit) {
+  background: #333;
+  color: #fff;
+}
+#edit-skill-dialog .btn:not(.btn-edit):hover {
+  background: #444;
+}

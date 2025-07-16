@@ -81,7 +81,7 @@
         </div>
 
         <!-- Skills Form -->
-        <div id="skills-form" class="form-section" style="display: none">
+        <div id="skills-form" class="form-section">
           <div class="form-group">
             <h3>Add Skill</h3>
             <input type="text" id="skill-name" placeholder="Skill" required />
@@ -95,10 +95,41 @@
               Add Skill
             </button>
           </div>
+          <div class="skill-table">
+            <h3>Skills</h3>
+            <table border="1">
+                <tr>
+                  <th>ID</th>
+                  <th>Skill</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+                <% if (ski.length > 0) { %>
+                  <% ski.forEach(function(item) { %>
+                    <tr>
+                      <td><%= item.ID %></td>
+                      <td><%= item.Skill %></td>
+                      <td><%= item.Description %></td>
+                      <td>
+                        <button type="button" class="btn btn-edit"
+                          onclick="editSkillDialog( '<%= item.ID %>', '<%= item.Skill %>', '<%= item.Description %>')">
+                          Edit
+                        </button>
+                        <button onclick="deleteSkill('<%= item.ID %>')">Delete</button>
+                      </td>
+                    </tr>
+                  <% }); %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="4">No skills added yet.</td>
+                  </tr>
+                <% } %>
+            </table>
+          
         </div>
 
         <!-- Experience Form -->
-        <div id="experience-form" class="form-section" style="display: none">
+        <div id="experience-form" class="form-section active">
           <div class="form-group">
             <h3>Add Experience</h3>
             <input
@@ -117,10 +148,41 @@
               Add Experience
             </button>
           </div>
+          <div class="experience-table">
+            <h3>Experience</h3>
+            <table border="1">
+                <tr>
+                  <th>ID</th>
+                  <th>Experience</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+                <% if (exp.length > 0) { %>
+                  <% exp.forEach(function(item) { %>
+                    <tr>
+                      <td><%= item.ID %></td>
+                      <td><%= item.Experience %></td>
+                      <td><%= item.Description %></td>
+                      <td>
+                        <button type="button" class="btn btn-edit"
+                          onclick="editExperienceDialog( '<%= item.ID %>', '<%= item.Experience %>', '<%= item.Description %>')">
+                          Edit
+                        </button>
+                        <button onclick="deleteExperience('<%= item.ID %>')">Delete</button>
+                      </td>
+                    </tr>
+                  <% }); %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="4">No experience added yet.</td>
+                  </tr>
+                <% } %>
+            </table>
+          </div>
         </div>
 
         <!-- Education Form -->
-        <div id="education-form" class="form-section" style="display: none">
+        <div id="education-form" class="form-section">
           <div class="form-group">
             <h3>Add Education</h3>
             <input
@@ -160,5 +222,8 @@
 
     <script src="/js/script.js"></script>
     <script src="/js/form.js"></script>
+    <script>
+      
+    </script>
   </body>
 </html>

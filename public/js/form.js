@@ -1,13 +1,18 @@
 // Form functionality for form.ejs
 
 function showForm(category) {
-  // Hide all forms first
-  document.getElementById("skills-form").style.display = "none";
-  document.getElementById("experience-form").style.display = "none";
-  document.getElementById("education-form").style.display = "none";
+  console.log("showForm called with:", category);
+  document.getElementById("skills-form").classList.remove("active");
+  document.getElementById("experience-form").classList.remove("active");
+  document.getElementById("education-form").classList.remove("active");
 
-  // Show the selected form
-  document.getElementById(category + "-form").style.display = "block";
+  if (category === "skills") {
+    document.getElementById("skills-form").classList.add("active");
+  } else if (category === "experience") {
+    document.getElementById("experience-form").classList.add("active");
+  } else if (category === "education") {
+    document.getElementById("education-form").classList.add("active");
+  }
 }
 
 // Custom dialog function
@@ -59,6 +64,9 @@ function submitSkill() {
           showCustomDialog("Skill sent to server successfully!", "success");
           document.getElementById("skill-name").value = "";
           document.getElementById("skill-details").value = "";
+          setTimeout(function () {
+            location.reload();
+          }, 1500);
         } else {
           showCustomDialog("Error sending skill to server", "error");
         }
@@ -139,4 +147,89 @@ function submitEducation() {
   } else {
     showCustomDialog("Please fill in all fields", "warning");
   }
+}
+
+// Edit Skill Dialog
+function editSkillDialog(id, skillName, skillDescription) {
+  console.log("Edit button clicked:", id, skillName, skillDescription);
+  let dialog = document.getElementById("edit-skill-dialog");
+  if (!dialog) {
+    dialog = document.createElement("div");
+    dialog.id = "edit-skill-dialog";
+    dialog.className = "dialog-overlay show";
+    dialog.innerHTML = `
+      <div class="dialog-box">
+        <div class="dialog-content">
+          <h3 style="color:#ff004f;">Edit Skill</h3>
+          <input id="edit-skill-name" type="text" value="" placeholder="Skill" style="margin-bottom:10px;width:100%;padding:8px;" />
+          <textarea id="edit-skill-description" rows="4" placeholder="Description" style="width:100%;padding:8px;"></textarea>
+          <div style="margin-top:18px;">
+            <button class="btn btn-edit" onclick="saveSkillEdit(${id})">Save</button>
+            <button class="btn" style="background:#333;" onclick="closeEditSkillDialog()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(dialog);
+  } else {
+    dialog.classList.remove("hidden");
+    dialog.classList.add("show");
+  }
+  document.getElementById("edit-skill-name").value = skillName;
+  document.getElementById("edit-skill-description").value = skillDescription;
+}
+function closeEditSkillDialog() {
+  const dialog = document.getElementById("edit-skill-dialog");
+  if (dialog) {
+    dialog.classList.remove("show");
+    dialog.classList.add("hidden");
+  }
+}
+function saveSkillEdit(id) {
+  const name = document.getElementById("edit-skill-name").value;
+  const description = document.getElementById("edit-skill-description").value;
+
+  if (name && description) {
+    console.log("ID:", id);
+    console.log("Name:", name);
+    console.log("Description:", description);
+    return fetch(`/api/skill/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, description, id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        showCustomDialog("Skill updated successfully", "success");
+        closeEditSkillDialog();
+        setTimeout(function () {
+          location.reload();
+        }, 1500);
+      });
+  } else {
+    showCustomDialog("Please fill in both fields.", "error");
+    console.error("Please fill in both fields.");
+  }
+}
+
+function deleteSkill(id) {
+  console.log("Delete button clicked:", id);
+  return fetch(`/api/skill/${id}/delete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      showCustomDialog("Skill deleted successfully", "success");
+      setTimeout(function () {
+        location.reload();
+      }, 1500);
+    });
 }
