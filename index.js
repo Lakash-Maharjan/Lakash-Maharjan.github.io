@@ -137,6 +137,8 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
+// Skill
+
 app.post("/api/skill/:id", (req, res) => {
   const { name, description, id } = req.body;
   console.log("ID:", id);
@@ -168,6 +170,88 @@ app.post("/api/skill/:id/delete", (req, res) => {
     id,
   });
   conn.query("DELETE FROM skills WHERE id = ?", [id], (err, result) => {
+    if (!err) {
+      console.log("Data deleted successfully");
+    } else {
+      console.log("Error while deleting data");
+    }
+  });
+});
+
+// Experience
+
+app.post("/api/experience/:id", (req, res) => {
+  const { title, detail, id } = req.body;
+  console.log("ID:", id);
+  console.log("Title:", title);
+  console.log("Detail:", detail);
+  res.json({
+    message: "Data received successfully",
+    title,
+    detail,
+  });
+  conn.query(
+    "UPDATE experience SET Experience = ?, Detail = ? WHERE id = ?",
+    [title, detail, id],
+    (err, result) => {
+      if (!err) {
+        console.log("Data inserted successfully");
+      } else {
+        console.log("Error while inserting data");
+      }
+    }
+  );
+});
+
+app.post("/api/experience/:id/delete", (req, res) => {
+  const { id } = req.body;
+  console.log("ID:", id);
+  res.json({
+    message: "Data received successfully",
+    id,
+  });
+  conn.query("DELETE FROM experience WHERE id = ?", [id], (err, result) => {
+    if (!err) {
+      console.log("Data deleted successfully");
+    } else {
+      console.log("Error while deleting data");
+    }
+  });
+});
+
+// Education
+
+app.post("/api/education/:id", (req, res) => {
+  const { year, detail, id } = req.body;
+  console.log("ID:", id);
+  console.log("Year:", year);
+  console.log("Detail:", detail);
+  res.json({
+    message: "Data received successfully",
+    year,
+    detail,
+  });
+  conn.query(
+    "UPDATE education SET Year = ?, Detail = ? WHERE id = ?",
+    [year, detail, id],
+    (err, result) => {
+      if (!err) {
+        console.log("Data inserted successfully");
+      } else {
+        console.log("Error while inserting data");
+      }
+    }
+  );
+});
+
+app.post("/api/education/:id/delete", (req, res) => {
+  const { id } = req.body;
+  console.log("ID:", id);
+  res.json({
+    message: "Data received successfully",
+    id,
+  });
+  conn.query("DELETE FROM education WHERE id = ?", [id], (err, result) => {
     if (!err) {
       console.log("Data deleted successfully");
     } else {

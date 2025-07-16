@@ -104,6 +104,9 @@ function submitExperience() {
           );
           document.getElementById("experience-title").value = "";
           document.getElementById("experience-details").value = "";
+          setTimeout(function () {
+            location.reload();
+          }, 1500);
         } else {
           showCustomDialog("Error sending experience to server", "error");
         }
@@ -137,6 +140,9 @@ function submitEducation() {
           showCustomDialog("Education sent to server successfully!", "success");
           document.getElementById("education-year").value = "";
           document.getElementById("education-details").value = "";
+          setTimeout(function () {
+            location.reload();
+          }, 1500);
         } else {
           showCustomDialog("Error sending education to server", "error");
         }
@@ -228,6 +234,176 @@ function deleteSkill(id) {
     .then((data) => {
       console.log("Success:", data);
       showCustomDialog("Skill deleted successfully", "success");
+      setTimeout(function () {
+        location.reload();
+      }, 1500);
+    });
+}
+
+// Edit Experience Dialog
+function editExperienceDialog(id, experienceTitle, experienceDetail) {
+  console.log("Edit button clicked:", id, experienceTitle, experienceDetail);
+  let dialog = document.getElementById("edit-experience-dialog");
+  if (!dialog) {
+    dialog = document.createElement("div");
+    dialog.id = "edit-experience-dialog";
+    dialog.className = "dialog-overlay show";
+    dialog.innerHTML = `
+      <div class="dialog-box">
+        <div class="dialog-content">
+          <h3 style="color:#ff004f;">Edit Experience</h3>
+          <input id="edit-experience-title" type="text" value="" placeholder="Experience" style="margin-bottom:10px;width:100%;padding:8px;" />
+          <textarea id="edit-experience-detail" rows="4" placeholder="Detail" style="width:100%;padding:8px;"></textarea>
+          <div style="margin-top:18px;">
+            <button class="btn btn-edit" onclick="saveExperienceEdit(${id})">Save</button>
+            <button class="btn" style="background:#333;" onclick="closeEditExperienceDialog()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(dialog);
+  } else {
+    dialog.classList.remove("hidden");
+    dialog.classList.add("show");
+  }
+  document.getElementById("edit-experience-title").value = experienceTitle;
+  document.getElementById("edit-experience-detail").value = experienceDetail;
+}
+function closeEditExperienceDialog() {
+  const dialog = document.getElementById("edit-experience-dialog");
+  if (dialog) {
+    dialog.classList.remove("show");
+    dialog.classList.add("hidden");
+  }
+}
+function saveExperienceEdit(id) {
+  const title = document.getElementById("edit-experience-title").value;
+  const detail = document.getElementById("edit-experience-detail").value;
+
+  if (title && detail) {
+    console.log("ID:", id);
+    console.log("Title:", title);
+    console.log("Detail:", detail);
+    return fetch(`/api/experience/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, detail, id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        showCustomDialog("Experience updated successfully", "success");
+        closeEditExperienceDialog();
+        setTimeout(function () {
+          location.reload();
+        }, 1500);
+      });
+  } else {
+    showCustomDialog("Please fill in both fields.", "error");
+    console.error("Please fill in both fields.");
+  }
+}
+
+function deleteExperience(id) {
+  console.log("Delete button clicked:", id);
+  return fetch(`/api/experience/${id}/delete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      showCustomDialog("Experience deleted successfully", "success");
+      setTimeout(function () {
+        location.reload();
+      }, 1500);
+    });
+}
+
+// Edit Education Dialog
+function editEducationDialog(id, educationYear, educationDetail) {
+  console.log("Edit button clicked:", id, educationYear, educationDetail);
+  let dialog = document.getElementById("edit-education-dialog");
+  if (!dialog) {
+    dialog = document.createElement("div");
+    dialog.id = "edit-education-dialog";
+    dialog.className = "dialog-overlay show";
+    dialog.innerHTML = `
+      <div class="dialog-box">
+        <div class="dialog-content">
+          <h3 style="color:#ff004f;">Edit Education</h3>
+          <input id="edit-education-year" type="text" value="" placeholder="Year" style="margin-bottom:10px;width:100%;padding:8px;" />
+          <textarea id="edit-education-detail" rows="4" placeholder="Detail" style="width:100%;padding:8px;"></textarea>
+          <div style="margin-top:18px;">
+            <button class="btn btn-edit" onclick="saveEducationEdit(${id})">Save</button>
+            <button class="btn" style="background:#333;" onclick="closeEditEducationDialog()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(dialog);
+  } else {
+    dialog.classList.remove("hidden");
+    dialog.classList.add("show");
+  }
+  document.getElementById("edit-education-year").value = educationYear;
+  document.getElementById("edit-education-detail").value = educationDetail;
+}
+function closeEditEducationDialog() {
+  const dialog = document.getElementById("edit-education-dialog");
+  if (dialog) {
+    dialog.classList.remove("show");
+    dialog.classList.add("hidden");
+  }
+}
+function saveEducationEdit(id) {
+  const year = document.getElementById("edit-education-year").value;
+  const detail = document.getElementById("edit-education-detail").value;
+
+  if (year && detail) {
+    console.log("ID:", id);
+    console.log("Year:", year);
+    console.log("Detail:", detail);
+    return fetch(`/api/education/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ year, detail, id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        showCustomDialog("Education updated successfully", "success");
+        closeEditEducationDialog();
+        setTimeout(function () {
+          location.reload();
+        }, 1500);
+      });
+  } else {
+    showCustomDialog("Please fill in both fields.", "error");
+    console.error("Please fill in both fields.");
+  }
+}
+
+function deleteEducation(id) {
+  console.log("Delete button clicked:", id);
+  return fetch(`/api/education/${id}/delete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      showCustomDialog("Education deleted successfully", "success");
       setTimeout(function () {
         location.reload();
       }, 1500);

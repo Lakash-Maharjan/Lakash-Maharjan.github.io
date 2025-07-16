@@ -227,8 +227,10 @@ body {
 
 /* Additional form-specific styles can be added here */
 
-/* --- Skill Table Styles --- */
-.skill-table {
+/* --- Table Styles --- */
+.skill-table,
+.experience-table,
+.education-table {
   margin-top: 30px;
   margin-bottom: 32px;
   background: #1a1a1a;
@@ -238,7 +240,9 @@ body {
   padding: 20px;
 }
 
-.skill-table table {
+.skill-table table,
+.experience-table table,
+.education-table table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -248,12 +252,18 @@ body {
 }
 
 .skill-table th,
-.skill-table td {
+.skill-table td,
+.experience-table th,
+.education-table th,
+.experience-table td,
+.education-table td {
   padding: 16px 14px;
   text-align: left;
 }
 
-.skill-table th {
+.skill-table th,
+.experience-table th,
+.education-table th {
   background: #ff004f;
   color: #fff;
   font-size: 18px;
@@ -261,28 +271,40 @@ body {
   border: none;
   border-right: 1.5px solid #ff6b9d;
 }
-.skill-table th:last-child {
+.skill-table th:last-child,
+.experience-table th:last-child,
+.education-table th:last-child {
   border-right: none;
 }
 
-.skill-table td {
+.skill-table td,
+.experience-table td,
+.education-table td {
   color: #eee;
   font-size: 16px;
   background: #232323;
   border-bottom: 1px solid #292929;
 }
 
-.skill-table tr:last-child td {
+.skill-table tr:last-child td,
+.experience-table tr:last-child td,
+.education-table tr:last-child td {
   border-bottom: none;
 }
 
-.skill-table tr:hover td {
+.skill-table tr:hover td,
+.experience-table tr:hover td,
+.education-table tr:hover td {
   background: #2a2a2a;
   transition: background 0.2s;
 }
 
 .skill-table button,
-.skill-table .btn {
+.skill-table .btn,
+.experience-table button,
+.education-table button,
+.experience-table .btn,
+.education-table .btn {
   background: #ff004f;
   color: #fff;
   border: none;
@@ -294,25 +316,37 @@ body {
 }
 
 .skill-table button:hover,
-.skill-table .btn:hover {
+.skill-table .btn:hover,
+.experience-table button:hover,
+.education-table button:hover,
+.experience-table .btn:hover,
+.education-table .btn:hover {
   background: #ff3366;
   color: #fff;
 }
 
-.skill-table td:last-child {
+.skill-table td:last-child,
+.experience-table td:last-child,
+.education-table td:last-child {
   text-align: center;
   vertical-align: middle;
 }
 
 .skill-table td .btn,
-.skill-table td button {
+.skill-table td button,
+.experience-table td .btn,
+.experience-table td button,
+.education-table td .btn,
+.education-table td button {
   display: inline-block;
   margin: 0 4px;
   vertical-align: middle;
 }
 
-/* --- Edit Skill Dialog Styles --- */
-#edit-skill-dialog.dialog-overlay {
+/* --- Edit Dialog Styles --- */
+#edit-skill-dialog.dialog-overlay,
+#edit-experience-dialog.dialog-overlay,
+#edit-education-dialog.dialog-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -327,7 +361,9 @@ body {
   visibility: visible;
   transition: opacity 0.3s;
 }
-#edit-skill-dialog .dialog-box {
+#edit-skill-dialog .dialog-box,
+#edit-experience-dialog .dialog-box,
+#edit-education-dialog .dialog-box {
   background: #232323;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
@@ -338,7 +374,9 @@ body {
   border: 1.5px solid #333;
   text-align: left;
 }
-#edit-skill-dialog .dialog-content h3 {
+#edit-skill-dialog .dialog-content h3,
+#edit-experience-dialog .dialog-content h3,
+#edit-education-dialog .dialog-content h3 {
   color: #ff004f;
   margin-bottom: 18px;
   font-size: 1.5rem;
@@ -346,7 +384,11 @@ body {
   text-align: center;
 }
 #edit-skill-dialog input[type="text"],
-#edit-skill-dialog textarea {
+#edit-skill-dialog textarea,
+#edit-experience-dialog input[type="text"],
+#edit-experience-dialog textarea,
+#edit-education-dialog input[type="text"],
+#edit-education-dialog textarea {
   width: 100%;
   background: #181818;
   color: #fff;
@@ -358,17 +400,25 @@ body {
   transition: border 0.2s;
 }
 #edit-skill-dialog input[type="text"]:focus,
-#edit-skill-dialog textarea:focus {
+#edit-skill-dialog textarea:focus,
+#edit-experience-dialog input[type="text"]:focus,
+#edit-experience-dialog textarea:focus,
+#edit-education-dialog input[type="text"]:focus,
+#edit-education-dialog textarea:focus {
   border-color: #ff004f;
   outline: none;
 }
-#edit-skill-dialog .dialog-content > div {
+#edit-skill-dialog .dialog-content > div,
+#edit-experience-dialog .dialog-content > div,
+#edit-education-dialog .dialog-content > div {
   display: flex;
   justify-content: center;
   gap: 14px;
   margin-top: 18px;
 }
-#edit-skill-dialog .btn {
+#edit-skill-dialog .btn,
+#edit-experience-dialog .btn,
+#edit-education-dialog .btn {
   min-width: 90px;
   padding: 10px 18px;
   font-size: 1rem;
@@ -381,16 +431,24 @@ body {
   transition: background 0.2s;
   margin: 0;
 }
-#edit-skill-dialog .btn-edit {
+#edit-skill-dialog .btn-edit,
+#edit-experience-dialog .btn-edit,
+#edit-education-dialog .btn-edit {
   background: #ff004f;
 }
-#edit-skill-dialog .btn-edit:hover {
+#edit-skill-dialog .btn-edit:hover,
+#edit-experience-dialog .btn-edit:hover,
+#edit-education-dialog .btn-edit:hover {
   background: #ff3366;
 }
-#edit-skill-dialog .btn:not(.btn-edit) {
+#edit-skill-dialog .btn:not(.btn-edit),
+#edit-experience-dialog .btn:not(.btn-edit),
+#edit-education-dialog .btn:not(.btn-edit) {
   background: #333;
   color: #fff;
 }
-#edit-skill-dialog .btn:not(.btn-edit):hover {
+#edit-skill-dialog .btn:not(.btn-edit):hover,
+#edit-experience-dialog .btn:not(.btn-edit):hover,
+#edit-education-dialog .btn:not(.btn-edit):hover {
   background: #444;
 }
