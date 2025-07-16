@@ -114,7 +114,8 @@ app.get("/", async (req, res) => {
     const [ski] = await db.execute("SELECT * from skills");
     const [edu] = await db.execute("SELECT * from education");
     const [exp] = await db.execute("SELECT * from experience");
-    return res.render("index", { ski, edu, exp });
+    const [ser] = await db.execute("SELECT * from services");
+    return res.render("index", { ski, edu, exp, ser });
   } catch (err) {
     console.log("Error while performing Query.", err);
     return res.status(500).send("Database error");
@@ -126,7 +127,8 @@ app.get("/admin", async (req, res) => {
     const [ski] = await db.execute("SELECT * from skills");
     const [edu] = await db.execute("SELECT * from education");
     const [exp] = await db.execute("SELECT * from experience");
-    return res.render("admin", { ski, edu, exp });
+    const [ser] = await db.execute("SELECT * from services");
+    return res.render("admin", { ski, edu, exp, ser });
   } catch (err) {
     console.log("Error while performing Query.", err);
     return res.status(500).send("Database error");
@@ -138,7 +140,8 @@ app.get("/form", async (req, res) => {
     const [ski] = await db.execute("SELECT * from skills");
     const [edu] = await db.execute("SELECT * from education");
     const [exp] = await db.execute("SELECT * from experience");
-    return res.render("form", { ski, edu, exp });
+    const [ser] = await db.execute("SELECT * from services");
+    return res.render("form", { ski, edu, exp, ser });
   } catch (err) {
     console.log("Error while performing Query.", err);
     return res.status(500).send("Database error");
@@ -264,6 +267,71 @@ app.post("/api/education/:id/delete", (req, res) => {
     id,
   });
   conn.query("DELETE FROM education WHERE id = ?", [id], (err, result) => {
+    if (!err) {
+      console.log("Data deleted successfully");
+    } else {
+      console.log("Error while deleting data");
+    }
+  });
+});
+
+app.post("/api/service", (req, res) => {
+  const { serviceSymbol, serviceTitle, serviceDescription } = req.body;
+  console.log("Symbol:", serviceSymbol);
+  console.log("Title:", serviceTitle);
+  console.log("Description:", serviceDescription);
+  res.json({
+    message: "Data received successfully",
+    serviceSymbol,
+    serviceTitle,
+    serviceDescription,
+  });
+  conn.query(
+    "INSERT INTO services (symbol, title, description) VALUES (?, ?, ?)",
+    [serviceSymbol, serviceTitle, serviceDescription],
+    (err, result) => {
+      if (!err) {
+        console.log("Data inserted successfully");
+      } else {
+        console.log("Error while inserting data");
+      }
+    }
+  );
+});
+
+app.post("/api/service/:id", (req, res) => {
+  const { symbol, title, description, id } = req.body;
+  console.log("ID:", id);
+  console.log("Symbol:", symbol);
+  console.log("Title:", title);
+  console.log("Description:", description);
+  res.json({
+    message: "Data received successfully",
+    symbol,
+    title,
+    description,
+  });
+  conn.query(
+    "UPDATE services SET symbol = ?, title = ?, description = ? WHERE id = ?",
+    [symbol, title, description, id],
+    (err, result) => {
+      if (!err) {
+        console.log("Data inserted successfully");
+      } else {
+        console.log("Error while inserting data");
+      }
+    }
+  );
+});
+
+app.post("/api/service/:id/delete", (req, res) => {
+  const { id } = req.body;
+  console.log("ID:", id);
+  res.json({
+    message: "Data received successfully",
+    id,
+  });
+  conn.query("DELETE FROM services WHERE id = ?", [id], (err, result) => {
     if (!err) {
       console.log("Data deleted successfully");
     } else {

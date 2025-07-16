@@ -5,6 +5,7 @@ function showForm(category) {
   document.getElementById("skills-form").classList.remove("active");
   document.getElementById("experience-form").classList.remove("active");
   document.getElementById("education-form").classList.remove("active");
+  document.getElementById("services-form").classList.remove("active");
 
   if (category === "skills") {
     document.getElementById("skills-form").classList.add("active");
@@ -12,6 +13,8 @@ function showForm(category) {
     document.getElementById("experience-form").classList.add("active");
   } else if (category === "education") {
     document.getElementById("education-form").classList.add("active");
+  } else if (category === "services") {
+    document.getElementById("services-form").classList.add("active");
   }
 }
 
@@ -66,7 +69,7 @@ function submitSkill() {
           document.getElementById("skill-details").value = "";
           setTimeout(function () {
             location.reload();
-          }, 1500);
+          }, 1000);
         } else {
           showCustomDialog("Error sending skill to server", "error");
         }
@@ -106,7 +109,7 @@ function submitExperience() {
           document.getElementById("experience-details").value = "";
           setTimeout(function () {
             location.reload();
-          }, 1500);
+          }, 1000);
         } else {
           showCustomDialog("Error sending experience to server", "error");
         }
@@ -142,13 +145,54 @@ function submitEducation() {
           document.getElementById("education-details").value = "";
           setTimeout(function () {
             location.reload();
-          }, 1500);
+          }, 1000);
         } else {
           showCustomDialog("Error sending education to server", "error");
         }
       })
       .catch((error) => {
         showCustomDialog("Failed to send education to server", "error");
+      });
+  } else {
+    showCustomDialog("Please fill in all fields", "warning");
+  }
+}
+
+function submitService() {
+  const serviceTitle = document.getElementById("service-title").value;
+  const serviceDescription = document.getElementById(
+    "service-description"
+  ).value;
+  const serviceSymbol = document.getElementById("service-symbol").value;
+
+  if (serviceTitle && serviceDescription && serviceSymbol) {
+    fetch("/api/service", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        serviceTitle: serviceTitle,
+        serviceDescription: serviceDescription,
+        serviceSymbol: serviceSymbol,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          showCustomDialog("Service sent to server successfully!", "success");
+          document.getElementById("service-title").value = "";
+          document.getElementById("service-description").value = "";
+          document.getElementById("service-symbol").value = "";
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
+        } else {
+          showCustomDialog("Error sending service to server", "error");
+        }
+      })
+      .catch((error) => {
+        showCustomDialog("Failed to send service to server", "error");
       });
   } else {
     showCustomDialog("Please fill in all fields", "warning");
@@ -213,7 +257,7 @@ function saveSkillEdit(id) {
         closeEditSkillDialog();
         setTimeout(function () {
           location.reload();
-        }, 1500);
+        }, 1000);
       });
   } else {
     showCustomDialog("Please fill in both fields.", "error");
@@ -236,7 +280,7 @@ function deleteSkill(id) {
       showCustomDialog("Skill deleted successfully", "success");
       setTimeout(function () {
         location.reload();
-      }, 1500);
+      }, 1000);
     });
 }
 
@@ -298,7 +342,7 @@ function saveExperienceEdit(id) {
         closeEditExperienceDialog();
         setTimeout(function () {
           location.reload();
-        }, 1500);
+        }, 1000);
       });
   } else {
     showCustomDialog("Please fill in both fields.", "error");
@@ -321,7 +365,7 @@ function deleteExperience(id) {
       showCustomDialog("Experience deleted successfully", "success");
       setTimeout(function () {
         location.reload();
-      }, 1500);
+      }, 1000);
     });
 }
 
@@ -383,7 +427,7 @@ function saveEducationEdit(id) {
         closeEditEducationDialog();
         setTimeout(function () {
           location.reload();
-        }, 1500);
+        }, 1000);
       });
   } else {
     showCustomDialog("Please fill in both fields.", "error");
@@ -406,6 +450,109 @@ function deleteEducation(id) {
       showCustomDialog("Education deleted successfully", "success");
       setTimeout(function () {
         location.reload();
-      }, 1500);
+      }, 1000);
+    });
+}
+
+//Edit Service Dialog
+function editServiceDialog(
+  id,
+  serviceSymbol,
+  serviceTitle,
+  serviceDescription
+) {
+  console.log(
+    "Edit button clicked:",
+    id,
+    serviceSymbol,
+    serviceTitle,
+    serviceDescription
+  );
+  let dialog = document.getElementById("edit-service-dialog");
+  if (!dialog) {
+    dialog = document.createElement("div");
+    dialog.id = "edit-service-dialog";
+    dialog.className = "dialog-overlay show";
+    dialog.innerHTML = `
+      <div class="dialog-box">
+        <div class="dialog-content">
+          <h3 style="color:#ff004f;">Edit Service</h3>
+          <input id="edit-service-symbol" type="text" value="" placeholder="Symbol (only class name)" style="margin-bottom:10px;width:100%;padding:8px;" />
+          <input id="edit-service-title" type="text" value="" placeholder="Service" style="margin-bottom:10px;width:100%;padding:8px;" />
+          <textarea id="edit-service-description" rows="4" placeholder="Description" style="width:100%;padding:8px;"></textarea>
+          <div style="margin-top:18px;">
+            <button class="btn btn-edit" onclick="saveServiceEdit(${id})">Save</button>
+            <button class="btn" style="background:#333;" onclick="closeEditServiceDialog()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(dialog);
+  } else {
+    dialog.classList.remove("hidden");
+    dialog.classList.add("show");
+  }
+  document.getElementById("edit-service-symbol").value = serviceSymbol;
+  document.getElementById("edit-service-title").value = serviceTitle;
+  document.getElementById("edit-service-description").value =
+    serviceDescription;
+}
+
+function closeEditServiceDialog() {
+  const dialog = document.getElementById("edit-service-dialog");
+  if (dialog) {
+    dialog.classList.remove("show");
+    dialog.classList.add("hidden");
+  }
+}
+
+function saveServiceEdit(id) {
+  const symbol = document.getElementById("edit-service-symbol").value;
+  const title = document.getElementById("edit-service-title").value;
+  const description = document.getElementById("edit-service-description").value;
+
+  if (title && description) {
+    console.log("ID:", id);
+    console.log("Symbol:", symbol);
+    console.log("Title:", title);
+    console.log("Description:", description);
+    return fetch(`/api/service/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ symbol, title, description, id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        showCustomDialog("Service updated successfully", "success");
+        closeEditServiceDialog();
+        setTimeout(function () {
+          location.reload();
+        }, 1000);
+      });
+  } else {
+    showCustomDialog("Please fill in both fields.", "error");
+    console.error("Please fill in both fields.");
+  }
+}
+
+function deleteService(id) {
+  console.log("Delete button clicked:", id);
+  return fetch(`/api/service/${id}/delete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      showCustomDialog("Service deleted successfully", "success");
+      setTimeout(function () {
+        location.reload();
+      }, 1000);
     });
 }

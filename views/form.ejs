@@ -22,11 +22,11 @@
             onclick="window.location.href='/'"
           />
           <ul id="sidemenu">
-            <li><a href="/../#header">Home</a></li>
-            <li><a href="/../#about">About</a></li>
+            <li><a href="/admin">Home</a></li>
+            <!-- <li><a href="/../#about">About</a></li>
             <li><a href="/../#services">Services</a></li>
             <li><a href="/../#portfolio">Portfolio</a></li>
-            <li><a href="/../#contact">Conact</a></li>
+            <li><a href="/../#contact">Conact</a></li> -->
             <li><a href="/form">Add details</a></li>
             <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
           </ul>
@@ -82,7 +82,22 @@
               >Education</label
             >
           </div>
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="services"
+              name="category"
+              value="services"
+              onchange="showForm('services')"
+            />
+            <label
+              for="services"
+              onclick="document.getElementById('services').click()"
+              >Services</label
+            >
+          </div>
         </div>
+      </form>
 
         <!-- Skills Form -->
         <div id="skills-form" class="form-section">
@@ -246,9 +261,56 @@
             </table>
           </div>
         </div>
-      </form>
-    </div>
 
+        <!-- Services Form -->
+        <div id="services-form" class="form-section">
+          <div class="form-group">
+            <h3>Add Service</h3>
+            <input type="text" id="service-symbol" placeholder="Symbol (only class name)" required />
+            <input type="text" id="service-title" placeholder="Service" required />
+            <textarea id="service-description" placeholder="Description" rows="4" required></textarea>
+            <button type="button" class="btn btn2" onclick="submitService()">
+              Add Service
+            </button>
+          </div>
+          <div class="service-table">
+            <h3>Services</h3>
+            <table border="1">
+              <tr>
+                <th>ID</th>
+                <th>Symbol</th>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+              <% if (ser.length > 0) { %> <% ser.map((item) => { %>
+              <tr>
+                <td><%= item.id %></td>
+                <td><%= item.symbol %></td>
+                <td><%= item.title %></td>
+                <td><%= item.description %></td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-edit"
+                    onclick="editServiceDialog( '<%= item.id %>', '<%= item.symbol %>', '<%= item.title %>', '<%= item.description %>')"
+                  >
+                    Edit
+                  </button>
+                  <button onclick="deleteService('<%= item.id %>')">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <% }); %> <% } else { %>
+              <tr>
+                <td colspan="5">No services added yet</td>
+              </tr>
+              <% } %>
+            </table>
+          </div>
+        </div>
+      
     <!-- Footer -->
     <div class="copyright">
       <p>Copyright © 2025 Lakash. All Rights Reserved.</p>
